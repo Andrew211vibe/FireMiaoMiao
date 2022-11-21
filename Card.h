@@ -200,7 +200,7 @@ public:
 
 
 /*先攻击再抽卡的类型*/
-class AtkDrawCard : public AttackCard,  public DrawCard {
+class AtkDrawCard : public AttackCard, public DrawCard {
 public:
 	AtkDrawCard(int dam = 0, std::string name = "none", int cost = 1, int idx = 0, type t = atk_draw) : BaseCard(name, cost, idx, t), AttackCard(dam, name, cost, idx, t), DrawCard(name, cost, idx, t) {}
 	/*对怪物造成伤害并抽一张牌*/
