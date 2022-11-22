@@ -1,15 +1,4 @@
 #include"Monster.h"
-/*
-class slimiaoKING :public AtkDefmonster
-{
-public:slimiaoKING(int hp = 130, int dam = 20, int x = 0, int y = 0, std::string name = "slimiaoKING") :AtkDefmonster(hp, dam, x, y, name) {}
-	  void turn();
-private:
-	int a[5] = {1,2,3,4,0};
-	int p = 4;
-};
-*/
-
 
 
 void push_monster_lib(BaseMonster monster)
@@ -95,6 +84,8 @@ int AtkDefmonster::get_monster_defend() { return monster_def; }
 
 void AtkDefmonster::set_def(int def) { monster_def = def; }
 
+void BaseMonster::set_monster_max_HP(int h) { monster_max_HP = h; }
+
 void slimiao::s_attack()
 {
 	set_monster_damage(get_monster_damage());
@@ -154,6 +145,7 @@ void cat_trader::ct_turn()
 	case 2:
 	{
 		ct_defend();
+		set_monster_damage(0);
 		break;
 	}
 	}
@@ -198,9 +190,10 @@ void BIGwormiao::Bwm_attack()
 void BIGwormiao::Bwm_defend()
 {
 	set_def(10);
+	set_monster_damage(0);
 }
 
-void BIGwormiao::turn()
+void BIGwormiao::Bwm_turn()
 {
 	set_def(0);
 	p = a[p];
@@ -228,15 +221,21 @@ void BIGwormiao::turn()
 	}
 	}
 }
-/*
-void slimiaoKING::turn()
+
+void slimiaoKING::sK_turn()
 {
-	if (m_HP <= m_max_HP / 2)
+	if (m_HP <= monster_max_HP / 2)
 	{
 		monster_lib.erase(monster_lib.begin() + find_monster(m_name));
-		slimiao a, b;
+		monster_name.erase(monster_name.begin() + find_monster(m_name));
+		slimiao* a = new slimiao;
+		a->set_monster_max_HP(m_HP);
+		slimiao* b = new slimiao;
+		b->set_monster_max_HP(m_HP);
 		monster_lib.push_back(a);
+		monster_name.push_back(a->get_name());
 		monster_lib.push_back(b);
+		monster_name.push_back(b->get_name());
 		return;
 	}
 	set_def(0);
@@ -245,11 +244,12 @@ void slimiaoKING::turn()
 	{
 	case 0: {
 		set_def(10);
+		set_monster_damage(0);
 		break;
 	}
 	case 1:
 	{
-
+		;
 		break;
 	}
 	case 2:
@@ -260,17 +260,20 @@ void slimiaoKING::turn()
 	}
 
 }
-*/
+
 void initialize_monster(int num)
 {
 	clear_monster_lib();
 	srand((unsigned)time(NULL));
 	for (int i = 0; i < num; i++)
 	{
-		int n = rand() % 3;
+
+		int n = rand() % 10 + 1;
 		switch (n)
 		{
-		case 0:
+		case 1:
+		case 2:
+		case 3:
 		{
 			slimiao* a = new slimiao;
 			//a->set_monster_id(0);
@@ -278,15 +281,19 @@ void initialize_monster(int num)
 			monster_lib.push_back(a);
 			break;
 		}
-		case 1:
+		case 5:
+		case 6:
 		{
 			cat_trader* b = new cat_trader;
-			/*b->set_monster_id(2);*/
+			//b->set_monster_id(2);
 			monster_name.push_back("cat_trader");
 			monster_lib.push_back(b);
 			break;
 		}
-		case 2:
+		case 7:
+		case 8:
+		case 9:
+		case 10:
 		{
 			wormiao* c = new wormiao;
 			monster_name.push_back("wormiao");
@@ -294,5 +301,11 @@ void initialize_monster(int num)
 			break;
 		}
 		}
+		/*
+		slimiaoKING* a = new slimiaoKING;
+		//a->set_monster_id(0);
+		monster_name.push_back("slimiaoKING");
+		monster_lib.push_back(a);
+		*/
 	}
 }

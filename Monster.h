@@ -48,14 +48,18 @@ public:
 
 	int get_monster_max_HP() { return monster_max_HP; }
 
+	void set_monster_max_HP(int h);
+
 	virtual void s_turn() { return; };
 	virtual void ct_turn() { return; };
 	virtual void wm_turn() { return; };
+	virtual void Bwm_turn() { return; };
+	virtual void sK_turn() { return; };
 
 	virtual std::string get_name();
 protected:
 	int m_HP;
-	const int monster_max_HP;
+	int monster_max_HP;
 	int m_damage;
 	int m_source_idx;
 	std::string m_name;
@@ -148,7 +152,7 @@ class BIGwormiao :public AtkDefmonster
 public:BIGwormiao(int hp = 80, int dam = 20, int idx = 4, std::string name = "BIGmormiao") :AtkDefmonster(hp, dam, idx, name) {}
 	  void Bwm_attack();
 	  void Bwm_defend();
-	  void turn();
+	  void Bwm_turn();
 private:
 	int a[3] = { 1 , 2 , 0 };
 	int p = 2;
@@ -156,16 +160,16 @@ private:
 };
 
 
-/*
+
 class slimiaoKING :public AtkDefmonster
 {
-public:slimiaoKING(int hp = 130, int dam = 20, int x = 0, int y = 0, std::string name = "slimiaoKING") :AtkDefmonster(hp, dam, x, y, name) {}
-	  void turn();
+public:slimiaoKING(int hp = 130, int dam = 0, int idx = 4, std::string name = "slimiaoKING") :AtkDefmonster(hp, dam, idx, name) {}
+	  void sK_turn();
 private:
-	int a[5] = {1,2,3,4,0};
-	int p = 4;
+	int a[3] = { 1,2,0 };
+	int p = 2;
 };
-*/
+
 
 extern std::vector<BaseMonster*> monster_lib;
 extern std::vector<std::string> monster_name;
