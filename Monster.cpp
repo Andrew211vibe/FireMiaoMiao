@@ -274,9 +274,10 @@ void initialize_monster(int num)
 		case 1:
 		case 2:
 		case 3:
+		case 4:
 		{
 			slimiao* a = new slimiao;
-			//a->set_monster_id(0);
+			a->set_monster_id(0);
 			monster_name.push_back("slimiao");
 			monster_lib.push_back(a);
 			break;
@@ -285,7 +286,7 @@ void initialize_monster(int num)
 		case 6:
 		{
 			cat_trader* b = new cat_trader;
-			//b->set_monster_id(2);
+			b->set_monster_id(2);
 			monster_name.push_back("cat_trader");
 			monster_lib.push_back(b);
 			break;
