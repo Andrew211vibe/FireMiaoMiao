@@ -82,7 +82,7 @@ void init_cards()
 void init_monster()
 {
     is_monster_all_died = false;
-    initialize_monster();
+    initialize_monster(floors);
 }
 
 /**

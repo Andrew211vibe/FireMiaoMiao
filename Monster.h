@@ -4,7 +4,27 @@
 #include <string>
 #include <ctime>
 #include <cstdlib>
-class BaseMonster
+
+class state
+{
+public:
+	int getStrength()const { return strength; }
+	int getWeekness()const { return weekness; }
+	int getDelicate()const { return delicate; }
+	int getShieldBroken()const { return shieldBroken; }
+	void setStrength(int tmp) { strength = tmp; }
+	void setWeekness(int tmp) { weekness = tmp; }
+	void setDelicate(int tmp) { delicate = tmp; }
+	void setShieldBroken(int tmp) { shieldBroken = tmp; }
+	void stateTurn();
+private:
+	int strength = 0;
+	int weekness = 0;
+	int delicate = 0;
+	int shieldBroken = 0;
+};
+
+class BaseMonster:public state
 {
 public:
 	BaseMonster(int hp, int dam, int idx, std::string name) :m_HP(hp), monster_max_HP(hp), m_damage(dam), m_name(name), m_source_idx(idx)
@@ -16,27 +36,18 @@ public:
 
 	virtual int find_monster(std::string name);
 
-
 	virtual int get_monster_id();
-
 
 	virtual void set_monster_xy(int x, int y);
 
-
 	virtual int get_monster_x();
-
 
 	virtual int get_monster_y();
 
-
 	//virtual void monster_graph_init();
-
-
 	//virtual void monster_grahp_draw(int x, int y, int w, int h);
 
-
 	int get_monster_damage();
-
 
 	void set_monster_damage(int dm);
 
@@ -174,6 +185,6 @@ private:
 extern std::vector<BaseMonster*> monster_lib;
 extern std::vector<std::string> monster_name;
 
-void initialize_monster(int num = 2);
+void initialize_monster(int floor,int num = 2);
 
 #endif

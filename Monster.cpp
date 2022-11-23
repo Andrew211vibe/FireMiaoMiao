@@ -1,5 +1,12 @@
 #include"Monster.h"
 
+void state::stateTurn()
+{
+	if (shieldBroken > 0)shieldBroken--;
+	if (delicate > 0)delicate--;
+	if (weekness > 0)weekness--;
+}
+
 
 void push_monster_lib(BaseMonster monster)
 {
@@ -113,6 +120,7 @@ void slimiao::s_turn()
 	}
 	}
 	set_monster_damage(get_monster_damage() + 3);
+	stateTurn();
 }
 
 void cat_trader::ct_attack()
@@ -149,6 +157,7 @@ void cat_trader::ct_turn()
 		break;
 	}
 	}
+	stateTurn();
 }
 
 void wormiao::wm_attack()
@@ -180,6 +189,7 @@ void wormiao::wm_turn()
 	}
 	}
 	set_monster_damage(get_monster_damage() + 3);
+	stateTurn();
 }
 
 void BIGwormiao::Bwm_attack()
@@ -220,6 +230,7 @@ void BIGwormiao::Bwm_turn()
 		break;
 	}
 	}
+	stateTurn();
 }
 
 void slimiaoKING::sK_turn()
@@ -258,20 +269,31 @@ void slimiaoKING::sK_turn()
 		break;
 	}
 	}
-
+	stateTurn();
 }
 
-void initialize_monster(int num)
+void initialize_monster(int floor,int num)
 {
 	clear_monster_lib();
 	srand((unsigned)time(NULL));
-	for (int i = 0; i < num; i++)
+	if(floor < 5)
+		for (int i = 0; i < num; i++)
 	{
 
 		int n = rand() % 10 + 1;
 		switch (n)
 		{
 		case 1:
+		{
+			if(floor > 3)
+			{
+				cat_trader* b = new cat_trader;
+				b->set_monster_id(2);
+				monster_name.push_back("cat_trader");
+				monster_lib.push_back(b);
+				break;
+			}
+		}
 		case 2:
 		case 3:
 		case 4:
@@ -302,11 +324,23 @@ void initialize_monster(int num)
 			break;
 		}
 		}
+
 		/*
 		slimiaoKING* a = new slimiaoKING;
 		//a->set_monster_id(0);
 		monster_name.push_back("slimiaoKING");
 		monster_lib.push_back(a);
 		*/
+	}
+	else if(floor == 5)
+	{
+		BIGwormiao* b = new BIGwormiao;
+		b->set_monster_id(2);
+		monster_name.push_back("BIGwormiao");
+		monster_lib.push_back(b);
+		BIGwormiao* c = new BIGwormiao;
+		c->set_monster_id(2);
+		monster_name.push_back("BIGwormiao");
+		monster_lib.push_back(c);
 	}
 }
