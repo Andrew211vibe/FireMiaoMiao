@@ -272,6 +272,30 @@ void slimiaoKING::sK_turn()
 	stateTurn();
 }
 
+void miaoxk::mxk_turn()
+{
+	set_monster_damage(0);
+	p = a[p];
+	switch (p)
+	{
+	case 0:
+	{
+		//造成一点破甲
+		break;
+	}
+	case 1:
+	{
+		//造成一点虚弱
+		break;
+	}
+	case 2:
+	{
+		set_monster_damage(10);
+		break;
+	}
+	}
+}
+
 void initialize_monster(int floor,int num)
 {
 	clear_monster_lib();

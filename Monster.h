@@ -66,6 +66,7 @@ public:
 	virtual void wm_turn() { return; };
 	virtual void Bwm_turn() { return; };
 	virtual void sK_turn() { return; };
+	virtual void mxk_turn() { return; }
 
 	virtual std::string get_name();
 protected:
@@ -181,6 +182,15 @@ private:
 	int p = 2;
 };
 
+class miaoxk :public AtkDefmonster
+{
+public:
+	miaoxk(int hp = 25, int dam = 0, int idx = 4, std::string name = "miaoxk") :AtkDefmonster(hp, dam, idx, name) {}
+	void mxk_turn();
+private:
+	int a[3] = { 1,2,0 };
+	int p = 2;
+};
 
 extern std::vector<BaseMonster*> monster_lib;
 extern std::vector<std::string> monster_name;
